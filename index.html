@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,7 +8,9 @@
   <title>Reserva tu Hotel — Tómalo Tours</title>
 
   <style>
-    /* ── RESET ── */
+
+    /* ── RESET MÍNIMO ── */
+
     *,
     *::before,
     *::after {
@@ -17,18 +19,29 @@
       padding: 0;
     }
 
+
     /* ── PÁGINA COMPLETA ── */
+
     body {
       min-height: 100vh;
       min-height: 100svh;
 
       background-image: url("fondo.jpeg");
+
+      /*
+        La imagen mantiene su proporción
+        y cubre toda la pantalla.
+      */
       background-size: cover;
-      background-position: center;
+
+      background-position: center center;
+
       background-repeat: no-repeat;
+
       background-color: #1A3A6B;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
@@ -37,11 +50,14 @@
       cursor: pointer;
     }
 
-    /* ── OSCURECER FONDO ── */
+
+    /* ── OVERLAY SEMITRANSPARENTE ── */
+
     body::before {
       content: "";
 
       position: fixed;
+
       inset: 0;
 
       background: rgba(0, 0, 0, 0.25);
@@ -51,9 +67,12 @@
       pointer-events: none;
     }
 
-    /* ── ENLACE DEL FONDO ── */
+
+    /* ── ENLACE INVISIBLE DEL FONDO ── */
+
     .fondo-link {
       position: fixed;
+
       inset: 0;
 
       z-index: 1;
@@ -65,49 +84,53 @@
       cursor: pointer;
     }
 
-    /* ── CONTENEDOR ── */
+
+    /* ── CONTENEDOR DEL BOTÓN ── */
+
     main {
       position: relative;
+
       z-index: 2;
 
-      width: 100%;
-
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      /*
-        Posición adaptable:
-        En pantallas grandes el botón
-        queda desplazado hacia la derecha
-        y hacia abajo.
-      */
-      transform: translate(
-        clamp(0px, 12vw, 190px),
-        clamp(100px, 15vh, 235px)
-      );
-
       padding: 24px;
+
+      /*
+        BOTÓN ORIGINAL.
+        No se modifica.
+      */
+      transform: translate(190px, 235px);
     }
 
-    /* ── BOTÓN ── */
+
+    /* ── BOTÓN DE RESERVA ── */
+
     .btn-reserva {
       position: relative;
 
       display: inline-flex;
+
       align-items: center;
+
       justify-content: center;
 
       gap: 12px;
 
-      width: min(390px, 90vw);
+      min-width: 390px;
 
       min-height: 62px;
 
       padding: 16px 38px;
 
       font-family: "Segoe UI", Arial, sans-serif;
-      font-size: clamp(17px, 1.4vw, 21px);
+
+      font-size: 21px;
+
       font-weight: 800;
 
       letter-spacing: 0.02em;
@@ -115,7 +138,9 @@
       color: #FFFFFF;
 
       text-decoration: none;
+
       text-transform: uppercase;
+
       text-align: center;
 
       background: linear-gradient(
@@ -145,16 +170,20 @@
       isolation: isolate;
     }
 
-    /* ── BRILLO ── */
+
+    /* ── BRILLO SUTIL ── */
+
     .btn-reserva::after {
       content: "";
 
       position: absolute;
 
       top: 0;
+
       left: -100%;
 
       width: 55%;
+
       height: 100%;
 
       background: linear-gradient(
@@ -175,12 +204,16 @@
       pointer-events: none;
     }
 
-    /* ── ANIMACIÓN BRILLO ── */
+
+    /* ── ANIMACIÓN DEL BRILLO ── */
+
     .btn-reserva:hover::after {
       left: 135%;
     }
 
+
     /* ── HOVER ── */
+
     .btn-reserva:hover {
       background: linear-gradient(
         135deg,
@@ -196,7 +229,9 @@
         0 0 0 4px rgba(214, 40, 40, 0.30);
     }
 
+
     /* ── CLICK ── */
+
     .btn-reserva:active {
       transform: translateY(0) scale(0.99);
 
@@ -204,151 +239,164 @@
         0 4px 10px rgba(0, 0, 0, 0.35);
     }
 
+
     /* ── TEXTO ── */
+
     .btn-reserva .texto {
       position: relative;
+
       z-index: 2;
     }
 
+
     /* ── FLECHA ── */
+
     .btn-reserva .flecha {
       position: relative;
+
       z-index: 2;
 
-      font-size: clamp(19px, 1.5vw, 22px);
+      font-size: 22px;
 
       line-height: 1;
 
       transition: transform 0.18s ease;
     }
 
-    /* ── ANIMACIÓN FLECHA ── */
+
+    /* ── ANIMACIÓN DE LA FLECHA ── */
+
     .btn-reserva:hover .flecha {
       transform: translateX(5px);
     }
 
+
     /* ── FOCO ── */
+
     .btn-reserva:focus-visible {
       outline: 3px solid #FFFFFF;
+
       outline-offset: 4px;
     }
 
 
     /* =====================================================
-       TABLETS
+       TABLET
        ===================================================== */
 
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
 
-      main {
-        transform: translate(
-          0,
-          clamp(100px, 16vh, 180px)
-        );
-      }
-
-      .btn-reserva {
-        width: min(360px, 80vw);
-      }
-    }
-
-
-    /* =====================================================
-       MÓVILES
-       ===================================================== */
-
-    @media (max-width: 600px) {
+      /*
+        El fondo sigue llenando la pantalla,
+        pero se centra correctamente.
+      */
 
       body {
+        background-size: cover;
         background-position: center center;
       }
 
-      main {
-        transform: translate(
-          0,
-          clamp(80px, 15vh, 140px)
-        );
+      .btn-reserva {
+        min-width: 300px;
 
-        padding: 16px;
+        min-height: 58px;
+
+        font-size: 18px;
+
+        padding: 16px 30px;
+      }
+
+      main {
+        transform: translate(0, 180px);
+      }
+    }
+
+
+    /* =====================================================
+       MÓVIL
+       ===================================================== */
+
+    @media (max-width: 480px) {
+
+      /*
+        En móviles usamos cover para evitar
+        deformar la imagen.
+      */
+
+      body {
+        background-size: cover;
+
+        /*
+          Puedes cambiar center por:
+          center top
+          center bottom
+          40% center
+          etc.
+        */
+        background-position: center center;
       }
 
       .btn-reserva {
-        width: min(360px, 88vw);
+        width: calc(100vw - 48px);
+
+        min-width: 0;
+
+        max-width: 360px;
 
         min-height: 56px;
 
-        padding: 14px 22px;
+        padding: 15px 24px;
 
-        font-size: clamp(15px, 4.5vw, 18px);
-
-        gap: 9px;
-
-        border-radius: 12px;
+        font-size: 17px;
       }
 
-      .btn-reserva .flecha {
-        font-size: 19px;
+      main {
+        transform: translate(0, 150px);
       }
     }
 
 
     /* =====================================================
-       MÓVILES PEQUEÑOS
+       CELULARES MUY ALTOS / ESTRECHOS
        ===================================================== */
 
-    @media (max-width: 400px) {
+    @media (max-width: 480px) and (min-height: 700px) {
 
-      main {
-        transform: translate(
-          0,
-          clamp(70px, 13vh, 110px)
-        );
-      }
-
-      .btn-reserva {
-        width: 90vw;
-
-        min-height: 54px;
-
-        padding: 13px 18px;
-
-        font-size: 15px;
-
-        gap: 7px;
-      }
-
-      .btn-reserva .flecha {
-        font-size: 18px;
+      body {
+        /*
+          Ajusta la posición vertical
+          para que la parte importante
+          de la imagen quede visible.
+        */
+        background-position: center center;
       }
     }
 
 
     /* =====================================================
-       PANTALLAS MUY ALTAS
+       MÓVIL HORIZONTAL
        ===================================================== */
 
-    @media (min-height: 900px) and (min-width: 901px) {
+    @media (max-width: 900px) and (orientation: landscape) {
 
-      main {
-        transform: translate(
-          clamp(0px, 12vw, 190px),
-          clamp(150px, 22vh, 250px)
-        );
+      body {
+        background-size: cover;
+
+        background-position: center center;
       }
     }
 
 
     /* =====================================================
-       PANTALLAS MUY ANCHAS
+       PANTALLAS GRANDES
        ===================================================== */
 
-    @media (min-width: 1400px) {
+    @media (min-width: 1200px) {
 
-      main {
-        transform: translate(
-          clamp(120px, 13vw, 220px),
-          clamp(180px, 22vh, 280px)
-        );
+      body {
+        background-size: cover;
+
+        background-position: center center;
       }
     }
 
@@ -371,6 +419,7 @@
 
 
 <body>
+
 
   <!--
     Enlace invisible que cubre todo el fondo.
@@ -409,6 +458,7 @@
     </a>
 
   </main>
+
 
 </body>
 </html>
