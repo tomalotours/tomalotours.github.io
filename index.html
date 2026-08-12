@@ -3,7 +3,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- IMPORTANTE PARA CELULARES -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Reserva tu Hotel — Tómalo Tours</title>
 
@@ -23,7 +28,7 @@
 
 
     /* =====================================================
-       PÁGINA
+       HTML Y BODY
        ===================================================== */
 
     html,
@@ -35,22 +40,19 @@
 
     body {
 
+      width: 100%;
       min-height: 100vh;
       min-height: 100svh;
 
-      background-image: url("fondo.jpeg");
-
       /*
-        La imagen llena toda la pantalla
-        manteniendo su proporción.
+        ================================================
+        IMAGEN PARA PC / LAPTOP
+        ================================================
       */
+
+      background-image: url("fondo-pc.jpeg");
 
       background-size: cover;
-
-      /*
-        PC:
-        imagen centrada.
-      */
 
       background-position: center center;
 
@@ -58,20 +60,29 @@
 
       background-color: #1A3A6B;
 
+
+      /* POSICIÓN */
+
       display: flex;
 
       align-items: center;
 
       justify-content: center;
 
+
+      /* EVITA SCROLL */
+
       overflow: hidden;
+
+
+      /* CURSOR */
 
       cursor: pointer;
     }
 
 
     /* =====================================================
-       OSCURECER FONDO
+       OSCURECER UN POCO LA IMAGEN
        ===================================================== */
 
     body::before {
@@ -111,7 +122,7 @@
 
 
     /* =====================================================
-       BOTÓN
+       CONTENEDOR DEL BOTÓN
        ===================================================== */
 
     main {
@@ -119,6 +130,8 @@
       position: relative;
 
       z-index: 2;
+
+      width: 100%;
 
       display: flex;
 
@@ -128,8 +141,12 @@
 
       padding: 24px;
 
+
       /*
-        POSICIÓN ORIGINAL
+        POSICIÓN DEL BOTÓN EN PC
+
+        X = 190px
+        Y = 235px
       */
 
       transform: translate(190px, 235px);
@@ -151,6 +168,9 @@
       justify-content: center;
 
       gap: 12px;
+
+
+      /* DIMENSIONES */
 
       min-width: 390px;
 
@@ -178,7 +198,7 @@
       text-align: center;
 
 
-      /* DEGRADADO */
+      /* ROJO */
 
       background: linear-gradient(
         135deg,
@@ -195,6 +215,8 @@
       border-radius: 14px;
 
 
+      /* CURSOR */
+
       cursor: pointer;
 
 
@@ -204,6 +226,8 @@
         0 7px 18px rgba(0, 0, 0, 0.45),
         0 0 0 3px rgba(214, 40, 40, 0.25);
 
+
+      /* ANIMACIONES */
 
       transition:
         transform 0.18s ease,
@@ -218,7 +242,7 @@
 
 
     /* =====================================================
-       BRILLO
+       BRILLO DEL BOTÓN
        ===================================================== */
 
     .btn-reserva::after {
@@ -254,6 +278,10 @@
     }
 
 
+    /* =====================================================
+       ANIMACIÓN DEL BRILLO
+       ===================================================== */
+
     .btn-reserva:hover::after {
 
       left: 135%;
@@ -261,7 +289,7 @@
 
 
     /* =====================================================
-       HOVER
+       HOVER DEL BOTÓN
        ===================================================== */
 
     .btn-reserva:hover {
@@ -295,7 +323,7 @@
 
 
     /* =====================================================
-       TEXTO
+       TEXTO DEL BOTÓN
        ===================================================== */
 
     .btn-reserva .texto {
@@ -324,6 +352,10 @@
     }
 
 
+    /* =====================================================
+       ANIMACIÓN DE LA FLECHA
+       ===================================================== */
+
     .btn-reserva:hover .flecha {
 
       transform: translateX(5px);
@@ -344,20 +376,30 @@
 
     /* =====================================================
        TABLET
+       601px - 900px
        ===================================================== */
 
-    @media (max-width: 768px) {
+    @media (min-width: 601px) and (max-width: 900px) {
+
+      /*
+        TABLET UTILIZA LA IMAGEN DE PC
+      */
 
       body {
 
-        /*
-          Mantiene la imagen proporcional
-          y recorta los lados necesarios.
-        */
+        background-image: url("fondo-pc.jpeg");
 
         background-size: cover;
 
         background-position: center center;
+      }
+
+
+      /* BOTÓN */
+
+      main {
+
+        transform: translate(0, 180px);
       }
 
 
@@ -371,49 +413,40 @@
 
         padding: 16px 30px;
       }
-
-
-      main {
-
-        transform: translate(0, 180px);
-      }
     }
 
 
     /* =====================================================
        CELULAR
+       600px O MENOS
        ===================================================== */
 
     @media (max-width: 600px) {
 
+      /*
+        ================================================
+        AQUÍ CAMBIA LA IMAGEN
+        ================================================
+      */
+
       body {
 
+        background-image: url("fondo-celular.jpeg");
+
         /*
-          AQUÍ ESTÁ LA CLAVE.
-
-          Cover hace que la imagen llene
-          completamente el celular.
-
-          Los lados se recortan automáticamente
-          para adaptar la imagen a la pantalla.
-
-          La imagen NO se deforma.
+          La imagen celular está diseñada
+          para formato vertical.
         */
 
         background-size: cover;
 
-        /*
-          Puedes cambiar este valor si quieres
-          mostrar otra zona de la imagen.
-
-          50% = centro
-        */
-
-        background-position: 50% 50%;
+        background-position: center center;
 
         background-repeat: no-repeat;
       }
 
+
+      /* BOTÓN */
 
       main {
 
@@ -436,22 +469,27 @@
         padding: 15px 24px;
 
         font-size: 17px;
+
+        gap: 9px;
+      }
+
+
+      .btn-reserva .flecha {
+
+        font-size: 19px;
       }
     }
 
 
     /* =====================================================
-       CELULARES ESTRECHOS
+       CELULAR PEQUEÑO
        ===================================================== */
 
     @media (max-width: 400px) {
 
       body {
 
-        /*
-          En teléfonos estrechos se mantiene
-          el recorte proporcional.
-        */
+        background-image: url("fondo-celular.jpeg");
 
         background-size: cover;
 
@@ -490,9 +528,20 @@
        CELULAR HORIZONTAL
        ===================================================== */
 
-    @media (max-width: 900px) and (orientation: landscape) {
+    @media (
+      max-width: 900px
+    ) and (
+      orientation: landscape
+    ) {
+
+      /*
+        Si el celular está horizontal,
+        seguimos usando la versión celular.
+      */
 
       body {
+
+        background-image: url("fondo-celular.jpeg");
 
         background-size: cover;
 
@@ -514,6 +563,8 @@
     @media (min-width: 1400px) {
 
       body {
+
+        background-image: url("fondo-pc.jpeg");
 
         background-size: cover;
 
@@ -550,7 +601,7 @@
 
 
   <!-- =====================================================
-       ENLACE INVISIBLE DEL FONDO
+       FONDO CLICKEABLE
        ===================================================== -->
 
   <a
