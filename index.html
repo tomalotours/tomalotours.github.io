@@ -1,13 +1,17 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Reserva tu Hotel — Tómalo Tours</title>
 
   <style>
-    /* ── RESET MÍNIMO ── */
-    *, *::before, *::after {
+    /* ── RESET ── */
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -16,12 +20,12 @@
     /* ── PÁGINA COMPLETA ── */
     body {
       min-height: 100vh;
+      min-height: 100svh;
 
-      background-image: url('fondo.jpeg');
+      background-image: url("fondo.jpeg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-
       background-color: #1A3A6B;
 
       display: flex;
@@ -30,11 +34,10 @@
 
       overflow: hidden;
 
-      /* Cursor de enlace en toda la página */
       cursor: pointer;
     }
 
-    /* ── OVERLAY SEMITRANSPARENTE ── */
+    /* ── OSCURECER FONDO ── */
     body::before {
       content: "";
 
@@ -48,7 +51,7 @@
       pointer-events: none;
     }
 
-    /* ── ENLACE INVISIBLE DEL FONDO ── */
+    /* ── ENLACE DEL FONDO ── */
     .fondo-link {
       position: fixed;
       inset: 0;
@@ -62,42 +65,51 @@
       cursor: pointer;
     }
 
-    /* ── CONTENEDOR DEL BOTÓN ── */
+    /* ── CONTENEDOR ── */
     main {
       position: relative;
       z-index: 2;
+
+      width: 100%;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      padding: 24px;
+      /*
+        Posición adaptable:
+        En pantallas grandes el botón
+        queda desplazado hacia la derecha
+        y hacia abajo.
+      */
+      transform: translate(
+        clamp(0px, 12vw, 190px),
+        clamp(100px, 15vh, 235px)
+      );
 
-      /* Posición del botón:
-         190px a la derecha
-         235px hacia abajo */
-      transform: translate(190px, 235px);
+      padding: 24px;
     }
 
-    /* ── BOTÓN DE RESERVA ── */
+    /* ── BOTÓN ── */
     .btn-reserva {
       position: relative;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
+
       gap: 12px;
 
-      /* ── DIMENSIONES ── */
-      min-width: 390px;
+      width: min(390px, 90vw);
+
       min-height: 62px;
 
       padding: 16px 38px;
 
-      /* ── TEXTO ── */
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-size: 21px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: clamp(17px, 1.4vw, 21px);
       font-weight: 800;
+
       letter-spacing: 0.02em;
 
       color: #FFFFFF;
@@ -106,7 +118,6 @@
       text-transform: uppercase;
       text-align: center;
 
-      /* ── ROJO DEGRADADO ── */
       background: linear-gradient(
         135deg,
         #F02B2B 0%,
@@ -114,14 +125,12 @@
         #C1121F 100%
       );
 
-      /* ── BORDE ── */
       border: 2px solid rgba(255, 255, 255, 0.85);
 
       border-radius: 14px;
 
       cursor: pointer;
 
-      /* ── SOMBRA ── */
       box-shadow:
         0 7px 18px rgba(0, 0, 0, 0.45),
         0 0 0 3px rgba(214, 40, 40, 0.25);
@@ -132,14 +141,16 @@
         box-shadow 0.18s ease;
 
       overflow: hidden;
+
       isolation: isolate;
     }
 
-    /* ── BRILLO SUTIL ── */
+    /* ── BRILLO ── */
     .btn-reserva::after {
       content: "";
 
       position: absolute;
+
       top: 0;
       left: -100%;
 
@@ -160,10 +171,11 @@
       transition: left 0.65s ease;
 
       z-index: 1;
+
       pointer-events: none;
     }
 
-    /* ── ANIMACIÓN DEL BRILLO ── */
+    /* ── ANIMACIÓN BRILLO ── */
     .btn-reserva:hover::after {
       left: 135%;
     }
@@ -203,13 +215,14 @@
       position: relative;
       z-index: 2;
 
-      font-size: 22px;
+      font-size: clamp(19px, 1.5vw, 22px);
+
       line-height: 1;
 
       transition: transform 0.18s ease;
     }
 
-    /* ── ANIMACIÓN DE LA FLECHA ── */
+    /* ── ANIMACIÓN FLECHA ── */
     .btn-reserva:hover .flecha {
       transform: translateX(5px);
     }
@@ -220,58 +233,151 @@
       outline-offset: 4px;
     }
 
-    /* ── TABLET ── */
-    @media (max-width: 768px) {
-      .btn-reserva {
-        min-width: 300px;
-        min-height: 58px;
 
-        font-size: 18px;
-        padding: 16px 30px;
-      }
+    /* =====================================================
+       TABLETS
+       ===================================================== */
+
+    @media (max-width: 900px) {
 
       main {
-        transform: translate(0, 180px);
+        transform: translate(
+          0,
+          clamp(100px, 16vh, 180px)
+        );
+      }
+
+      .btn-reserva {
+        width: min(360px, 80vw);
       }
     }
 
-    /* ── MÓVIL ── */
-    @media (max-width: 480px) {
-      .btn-reserva {
-        width: calc(100vw - 48px);
 
-        min-width: 0;
-        max-width: 360px;
+    /* =====================================================
+       MÓVILES
+       ===================================================== */
+
+    @media (max-width: 600px) {
+
+      body {
+        background-position: center center;
+      }
+
+      main {
+        transform: translate(
+          0,
+          clamp(80px, 15vh, 140px)
+        );
+
+        padding: 16px;
+      }
+
+      .btn-reserva {
+        width: min(360px, 88vw);
 
         min-height: 56px;
 
-        padding: 15px 24px;
+        padding: 14px 22px;
 
-        font-size: 17px;
+        font-size: clamp(15px, 4.5vw, 18px);
+
+        gap: 9px;
+
+        border-radius: 12px;
       }
 
-      main {
-        transform: translate(0, 150px);
+      .btn-reserva .flecha {
+        font-size: 19px;
       }
     }
 
-    /* ── REDUCIR ANIMACIONES ── */
+
+    /* =====================================================
+       MÓVILES PEQUEÑOS
+       ===================================================== */
+
+    @media (max-width: 400px) {
+
+      main {
+        transform: translate(
+          0,
+          clamp(70px, 13vh, 110px)
+        );
+      }
+
+      .btn-reserva {
+        width: 90vw;
+
+        min-height: 54px;
+
+        padding: 13px 18px;
+
+        font-size: 15px;
+
+        gap: 7px;
+      }
+
+      .btn-reserva .flecha {
+        font-size: 18px;
+      }
+    }
+
+
+    /* =====================================================
+       PANTALLAS MUY ALTAS
+       ===================================================== */
+
+    @media (min-height: 900px) and (min-width: 901px) {
+
+      main {
+        transform: translate(
+          clamp(0px, 12vw, 190px),
+          clamp(150px, 22vh, 250px)
+        );
+      }
+    }
+
+
+    /* =====================================================
+       PANTALLAS MUY ANCHAS
+       ===================================================== */
+
+    @media (min-width: 1400px) {
+
+      main {
+        transform: translate(
+          clamp(120px, 13vw, 220px),
+          clamp(180px, 22vh, 280px)
+        );
+      }
+    }
+
+
+    /* =====================================================
+       REDUCIR ANIMACIONES
+       ===================================================== */
+
     @media (prefers-reduced-motion: reduce) {
+
       .btn-reserva,
       .btn-reserva::after,
       .btn-reserva .flecha {
         transition: none;
       }
     }
+
   </style>
 </head>
+
 
 <body>
 
   <!--
     Enlace invisible que cubre todo el fondo.
-    Cualquier clic fuera del botón lleva a la página de reserva.
+    Cualquier clic fuera del botón lleva
+    a la página de reserva.
   -->
+
   <a
     class="fondo-link"
     href="https://reserva.tomalotours.com"
@@ -280,20 +386,30 @@
     aria-label="Ir a la página de reservas"
   ></a>
 
+
+  <!-- BOTÓN PRINCIPAL -->
+
   <main>
 
-    <!-- Botón principal de reserva -->
     <a
       class="btn-reserva"
       href="https://reserva.tomalotours.com"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span class="texto">RESERVA AQUÍ AHORA</span>
-      <span class="flecha">➜</span>
+
+      <span class="texto">
+        RESERVA AQUÍ AHORA
+      </span>
+
+      <span class="flecha">
+        ➜
+      </span>
+
     </a>
 
   </main>
 
 </body>
 </html>
+```
